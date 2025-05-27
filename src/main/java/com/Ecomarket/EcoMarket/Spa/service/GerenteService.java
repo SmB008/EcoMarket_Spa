@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 
@@ -24,7 +25,23 @@ public class GerenteService {
         return gerenteRepository.findAll();
     }
 
+    public Gerente actualizarGerente(String rut, Gerente gerenteActualizado) {
+        Gerente gerenteExistente = gerenteRepository.findByRut(rut)
+            .orElseThrow(() -> new RuntimeException("Gerente con el rut: " + rut + " no existe"));
 
+
+        gerenteExistente.setCorreo(gerenteActualizado.getCorreo());
+        gerenteExistente.setDireccion(gerenteActualizado.getDireccion());
+        gerenteExistente.setTelefono(gerenteActualizado.getTelefono());
+        
+
+        return gerenteRepository.save(gerenteExistente);
+    }
+
+    public void eliminarGerentePorRut(String rut) {
+        Optional<Gerente> gerente = gerenteRepository.findByRut(rut);
+        gerente.ifPresent(gerenteRepository::delete);
+    }
 
 
 }

@@ -1,8 +1,7 @@
 package com.Ecomarket.EcoMarket.Spa.controller;
 
 
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/api/usuario/cliente")
 
 
 public class ClienteController {
@@ -27,7 +26,7 @@ public class ClienteController {
     private ClienteService clienteService;
     
     
-    @PostMapping("path")
+    @PostMapping("/crear")
     public Cliente crearUsuario(@RequestBody Cliente usuario) {
         return clienteService.crearUsuario(usuario);
     }
@@ -57,6 +56,7 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
             .body("El cliente con el rut: " + rut + " ha sido eliminado con exito");
     }
+    
 
 
 

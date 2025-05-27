@@ -31,8 +31,6 @@ public class ClienteService {
             .orElseThrow(() -> new RuntimeException("Cliente con el rut: " + rut + " no existe"));
 
 
-        clienteExistente.setNombre(clienteActualizado.getNombre());
-        clienteExistente.setApellido(clienteActualizado.getApellido());
         clienteExistente.setCorreo(clienteActualizado.getCorreo());
         clienteExistente.setDireccion(clienteActualizado.getDireccion());
         clienteExistente.setTelefono(clienteActualizado.getTelefono());

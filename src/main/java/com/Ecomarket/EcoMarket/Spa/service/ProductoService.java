@@ -27,12 +27,12 @@ public class ProductoService {
     }
 
 
-    public Optional<Producto> buscarPorId(String id) {
+    public Optional<Producto> buscarPorId(Integer id) {
         return productoRepository.findById(id);
     }
 
 
-    public Producto actualizarProducto(String id, Producto productoActualizado) {
+    public Producto actualizarProducto(Integer id, Producto productoActualizado) {
         Producto productoExistente = productoRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Producto con el id: " + id + " no ha sido encontrado"));
 
@@ -47,10 +47,11 @@ public class ProductoService {
 
 
 
-    public void eliminarProductoPorId(String id) {
+    public void eliminarProductoPorId(Integer id) {
         Optional<Producto> producto = productoRepository.findById(id);
         producto.ifPresent(productoRepository::delete);
     }
+    
 
     
 }

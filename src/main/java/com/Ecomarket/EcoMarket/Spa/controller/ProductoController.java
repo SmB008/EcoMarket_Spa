@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/api/usuario/producto")
 
 
 public class ProductoController {
@@ -26,7 +26,7 @@ public class ProductoController {
     private ProductoService productoService;
     
     
-    @PostMapping("path")
+    @PostMapping("/crear")
     public Producto crearProducto(@RequestBody Producto producto) {
         return productoService.crearProducto(producto);
     }
@@ -39,14 +39,14 @@ public class ProductoController {
 
 
     @GetMapping("/buscar/{id}")
-    public Producto buscarPorId(@PathVariable String id) {
+    public Producto buscarPorId(@PathVariable Integer id) {
         return productoService.buscarPorId(id)
             .orElseThrow(() -> new RuntimeException("Producto con el id: " + id + " no ha sido encontrado"));
     }
     
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Producto> actualizarProducto(@PathVariable String id, @RequestBody Producto productoActualizado) {
+    public ResponseEntity<Producto> actualizarProducto(@PathVariable Integer id, @RequestBody Producto productoActualizado) {
         try {
             Producto actualizado = productoService.actualizarProducto(id, productoActualizado);
             return ResponseEntity.ok(actualizado);
@@ -58,11 +58,12 @@ public class ProductoController {
 
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarProducto(@PathVariable String id) {
+    public ResponseEntity<String> eliminarProducto(@PathVariable Integer id) {
         productoService.eliminarProductoPorId(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
             .body("Producto con el id: " + id + " ha sido eliminado con exito");
     }
+    
 
 
     
